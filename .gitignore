@@ -1,0 +1,10 @@
+# Ignore sensitive credentials and configuration files
+credentials.json
+token.json
+.env
+
+# Ignore Python virtual environment directory
+venv/
+
+# Ignore macOS-specific .DS_Store files
+.DS_Store
