@@ -61,7 +61,7 @@ class Event:
         self.start.editDateTime(newStartTime)
 
     def editEndTime(self, newEndTime) -> None:
-        self.start.editDateTime(newEndTime)
+        self.end.editDateTime(newEndTime)
 
     def editTimeZone(self, newTimeZone) -> None:
         self.start.editTimeZone(newTimeZone)
@@ -87,7 +87,7 @@ class Event:
         print(f"- Location: {self.location}")
         print(f"- Description: {self.description}")
         print(f"- Start Date(Time): {self.start.getDateTime()[0]}, {self.start.getDateTime()[1]}")
-        print(f"- Start Date(Time): {self.end.getDateTime()[0]}, {self.end.getDateTime()[1]}\n")
+        print(f"- End Date(Time): {self.end.getDateTime()[0]}, {self.end.getDateTime()[1]}\n")
 
 #
 # calendarPush
