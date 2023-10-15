@@ -12,13 +12,13 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from flask import Flask
+
+
+#### Please specify your default timezone formatted as an IANA Time Zone Database name: ####
+defaultTimeZone = "America/Chicago"
 
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
-
-# Please specify your default timezone formatted as an IANA Time Zone Database name:
-defaultTimeZone = "Europe/Madrid"
 
 #
 # Start_or_End
@@ -97,10 +97,6 @@ class Event:
 def calendarPush(event : Event, creds) -> None:
     # to_push = events.getEvents()
     service = build("calendar", "v3", credentials=creds)
-
-    # if len(to_push) == 0:
-    #     print("No events to push")
-    #     return
     
     print("Pushing event to calendar...")
     try:
@@ -124,8 +120,7 @@ def calendarPush(event : Event, creds) -> None:
             },
         }
             
-        calId = "e1205b4ff7417aa6aece23057a10daeedaeb114732adc03d60e25d8e17624cda@group.calendar.google.com"
-        event = service.events().insert(calendarId=calId, body=event).execute()
+        event = service.events().insert(calendarId='primary', body=event).execute()
         print(f"Event successfully created: {event.get('htmlLink')}", )
 
     except HttpError as error:
@@ -165,9 +160,9 @@ Location: Ford Design Center Ground Floor Lobby
 
 Looking for an opportunity to talk with representatives from a variety of companies? This is an informal event to network and learn more about these companies. Find out what engineer roles they have, if they have any openings and what their hiring process is.
 Companies in attendance will include:
-ActiveCampaign
-Epic
-IMC Trading
+- ActiveCampaign
+- Epic
+- IMC Trading
 """
 
     example_output1 = """
@@ -221,7 +216,7 @@ When: Thursday 4/13 @ 6:00 - 7:00 PM at Tech M164 and via Zoom (link here)
             {"role": "user", "content": event_description}
         ],
         temperature=0.2,
-        max_tokens=150
+        max_tokens=180
     )
 
     usage = response["usage"]
@@ -252,7 +247,7 @@ When: Thursday 4/13 @ 6:00 - 7:00 PM at Tech M164 and via Zoom (link here)
     return event
 
 def inputEvent(api_key) -> Event:
-    print("Please write or paste your event description. To submit or exit please press Enter followed by CTRL+D (CTRL+Z on Windows):")
+    print("Please write or paste your event description. To submit or exit please press Enter followed by CTRL+D:")
     
     lines_str = ''
     lines = []
@@ -270,7 +265,7 @@ def inputEvent(api_key) -> Event:
                 lines = []
                 lines_str = ''
 
-                print("Please write or paste your event description. To submit or exit please press Enter followed by CTRL+D (CTRL+Z on Windows):")
+                print("Please write or paste your event description. To submit or exit please press Enter followed by CTRL+D:")
                 continue
             
             break
