@@ -360,7 +360,7 @@ def editEvent(event : Event, api_key):
             count += 1
 
         elif field.strip() == '4':
-            newStart = input("Please enter a new start date and time (no specific format) and press Enter: ")
+            newStart = input("Please enter a new start time making sure to specify the month, day, and time in no particular format and press Enter: ")
             
             # Reformat the new start time using the GPT API
             formatted_newStart = reformat_times(newStart, api_key).strip()
@@ -383,7 +383,7 @@ def editEvent(event : Event, api_key):
             count += 1
 
         elif field.strip() == '5':
-            newEnd = input("Please enter a new end date and time (no specific format) and press Enter: ")
+            newEnd = input("Please enter a new end time making sure to specify the month, day, and time in no particular format and press Enter: ")
 
             # Reformat the new end time using the GPT API
             formatted_newEnd = reformat_times(newEnd, api_key).strip()
